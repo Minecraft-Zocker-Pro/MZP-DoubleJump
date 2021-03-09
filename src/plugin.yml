@@ -1,0 +1,9 @@
+name: MZP-DoubleJump
+main: minecraft.doublejump.zocker.pro.Main
+author: ludgart
+version: 0.0.1
+website: https://minecraft.plugin.zocker.pro/
+depend: [ MZP-Core ]
+softdepend: [ AParkour ]
+
+api-version: 1.13
