@@ -23,7 +23,7 @@ public class CooldownHandler {
 			@Override
 			public void run() {
 				for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-					List<Cooldown> cooldownList = Cooldown.getCooldowns(onlinePlayer.getUniqueId());
+					List<Cooldown> cooldownList = Cooldown.getCooldown(onlinePlayer.getUniqueId());
 					if (cooldownList == null) continue;
 
 					final Optional<Cooldown> cooldownOptional = cooldownList.stream()
@@ -40,7 +40,7 @@ public class CooldownHandler {
 					if (cooldownOptional.isPresent()) {
 						Cooldown cooldown = cooldownOptional.get();
 						if (cooldown.isElapsed()) {
-							Cooldown.getCooldowns(onlinePlayer.getUniqueId()).remove(cooldown);
+							Cooldown.getCooldown(onlinePlayer.getUniqueId()).remove(cooldown);
 
 							new BukkitRunnable() {
 								@Override
@@ -54,8 +54,10 @@ public class CooldownHandler {
 						new BukkitRunnable() {
 							@Override
 							public void run() {
-								onlinePlayer.setFlying(false);
-								onlinePlayer.setAllowFlight(true);
+								if (onlinePlayer.hasPermission("mzp.doublejump.use")) {
+									onlinePlayer.setFlying(false);
+									onlinePlayer.setAllowFlight(true);
+								}
 							}
 						}.runTask(Main.getPlugin());
 					}

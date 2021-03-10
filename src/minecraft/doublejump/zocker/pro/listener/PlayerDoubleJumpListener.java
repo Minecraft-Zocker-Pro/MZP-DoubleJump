@@ -19,14 +19,14 @@ public class PlayerDoubleJumpListener implements Listener {
 	public void onPlayerDoubleJump(PlayerDoubleJumpEvent event) {
 		Player player = event.getPlayer();
 
-		List<Cooldown> cooldownList = Cooldown.getCooldowns(player.getUniqueId());
+		List<Cooldown> cooldownList = Cooldown.getCooldown(player.getUniqueId());
 		if (cooldownList == null) {
 			Cooldown cooldown = new Cooldown(player.getUniqueId(), TimeUnit.SECONDS, 5);
 			cooldown.setItemStack(Main.getItemStack());
 			return;
 		}
 
-		Optional<Cooldown> cooldownOptional = Cooldown.getCooldowns(player.getUniqueId())
+		Optional<Cooldown> cooldownOptional = Cooldown.getCooldown(player.getUniqueId())
 			.stream()
 			.filter(Objects::nonNull)
 			.filter(cooldown1 -> cooldown1.getItemStack().isSimilar(Main.getItemStack()))
