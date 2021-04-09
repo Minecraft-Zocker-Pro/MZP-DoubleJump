@@ -20,7 +20,13 @@ public class PlayerToggleFlightListener implements Listener {
 		PlayerDoubleJumpEvent playerDoubleJumpEvent = new PlayerDoubleJumpEvent(player);
 		Bukkit.getPluginManager().callEvent(playerDoubleJumpEvent);
 
-		if (playerDoubleJumpEvent.isCancelled()) return;
+		if (playerDoubleJumpEvent.isCancelled()) {
+			player.setAllowFlight(false);
+			player.setFlying(false);
+			event.setCancelled(true);
+			player.setAllowFlight(true);
+			return;
+		}
 
 		player.setVelocity(player.getLocation().getDirection()
 			.multiply(Main.DOUBLE_JUMP_CONFIG.getDouble("doublejump.multiply"))

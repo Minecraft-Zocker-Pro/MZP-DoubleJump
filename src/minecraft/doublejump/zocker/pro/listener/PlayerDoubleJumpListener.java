@@ -17,6 +17,8 @@ public class PlayerDoubleJumpListener implements Listener {
 
 	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
 	public void onPlayerDoubleJump(PlayerDoubleJumpEvent event) {
+		if (event.isCancelled()) return;
+		
 		Player player = event.getPlayer();
 
 		List<Cooldown> cooldownList = Cooldown.getCooldown(player.getUniqueId());

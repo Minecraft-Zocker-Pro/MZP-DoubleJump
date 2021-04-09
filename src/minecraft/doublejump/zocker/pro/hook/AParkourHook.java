@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 
 public class AParkourHook implements Listener {
 
-	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
 	public void onAParkourDoubleJump(PlayerDoubleJumpEvent event) {
 		if ((new ParkourAPI()).isInParkour(event.getPlayer())) {
 			event.setCancelled(true);
