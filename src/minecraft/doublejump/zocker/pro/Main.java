@@ -7,6 +7,7 @@ import minecraft.core.zocker.pro.inventory.util.ItemBuilder;
 import minecraft.doublejump.zocker.pro.hook.AParkourHook;
 import minecraft.doublejump.zocker.pro.listener.PlayerDoubleJumpListener;
 import minecraft.doublejump.zocker.pro.listener.PlayerJoinListener;
+import minecraft.doublejump.zocker.pro.listener.PlayerMoveListener;
 import minecraft.doublejump.zocker.pro.listener.PlayerToggleFlightListener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
@@ -45,6 +46,7 @@ public class Main extends CorePlugin {
 		pluginManager.registerEvents(new PlayerJoinListener(), this);
 
 		pluginManager.registerEvents(new PlayerToggleFlightListener(), this);
+		pluginManager.registerEvents(new PlayerMoveListener(), this);
 		pluginManager.registerEvents(new PlayerDoubleJumpListener(), this);
 
 		if (getServer().getPluginManager().isPluginEnabled("AParkour")) {

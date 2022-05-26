@@ -1,5 +1,6 @@
 package minecraft.doublejump.zocker.pro.listener;
 
+import me.davidml16.aparkour.api.ParkourAPI;
 import minecraft.core.zocker.pro.compatibility.CompatibleParticleHandler;
 import minecraft.core.zocker.pro.compatibility.CompatibleSound;
 import minecraft.doublejump.zocker.pro.Main;
@@ -17,6 +18,14 @@ public class PlayerToggleFlightListener implements Listener {
 	public void onPlayerToggleFlight(PlayerToggleFlightEvent event) {
 		Player player = event.getPlayer();
 
+		if (Bukkit.getServer().getPluginManager().isPluginEnabled("AParkour")) {
+			if ((new ParkourAPI()).isInParkour(player)) {
+				player.setAllowFlight(false);
+				player.setFlying(false);
+				return;
+			}
+		}
+		
 		PlayerDoubleJumpEvent playerDoubleJumpEvent = new PlayerDoubleJumpEvent(player);
 		Bukkit.getPluginManager().callEvent(playerDoubleJumpEvent);
 
@@ -33,7 +42,7 @@ public class PlayerToggleFlightListener implements Listener {
 			.setY(Main.DOUBLE_JUMP_CONFIG.getDouble("doublejump.height")));
 
 		if (Main.DOUBLE_JUMP_CONFIG.getBool("doublejump.sound.enabled")) {
-			CompatibleSound.ENTITY_ENDER_DRAGON_FLAP.play(player, 2.0f, 3.0f);
+			CompatibleSound.ENTITY_ENDER_DRAGON_FLAP.play(player, 3.0f, 2.0f);
 		}
 
 		if (Main.DOUBLE_JUMP_CONFIG.getBool("doublejump.effect.enabled")) {
@@ -43,6 +52,5 @@ public class PlayerToggleFlightListener implements Listener {
 		player.setAllowFlight(false);
 		player.setFlying(false);
 		event.setCancelled(true);
-		player.setAllowFlight(true);
 	}
 }

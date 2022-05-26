@@ -1,5 +1,6 @@
 package minecraft.doublejump.zocker.pro.listener;
 
+import minecraft.core.zocker.pro.config.Config;
 import minecraft.core.zocker.pro.util.Cooldown;
 import minecraft.doublejump.zocker.pro.Main;
 import minecraft.doublejump.zocker.pro.event.PlayerDoubleJumpEvent;
@@ -18,7 +19,8 @@ public class PlayerDoubleJumpListener implements Listener {
 	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
 	public void onPlayerDoubleJump(PlayerDoubleJumpEvent event) {
 		if (event.isCancelled()) return;
-		
+		if (!Main.DOUBLE_JUMP_CONFIG.getBool("doublejump.cooldown.enabled")) return;
+
 		Player player = event.getPlayer();
 
 		List<Cooldown> cooldownList = Cooldown.getCooldown(player.getUniqueId());
@@ -38,7 +40,6 @@ public class PlayerDoubleJumpListener implements Listener {
 			Cooldown cooldown = cooldownOptional.get();
 			if (!cooldown.isElapsed()) {
 				event.setCancelled(true);
-				player.setAllowFlight(false);
 				return;
 			}
 
