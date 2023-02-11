@@ -1,6 +1,5 @@
 package minecraft.doublejump.zocker.pro.listener;
 
-import minecraft.core.zocker.pro.config.Config;
 import minecraft.core.zocker.pro.util.Cooldown;
 import minecraft.doublejump.zocker.pro.Main;
 import minecraft.doublejump.zocker.pro.event.PlayerDoubleJumpEvent;

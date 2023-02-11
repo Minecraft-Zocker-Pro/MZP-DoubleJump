@@ -20,6 +20,8 @@ public class PlayerMoveListener implements Listener {
 			}
 
 			event.getPlayer().setAllowFlight(true);
+		} else {
+			event.getPlayer().setAllowFlight(true);
 		}
 	}
 }

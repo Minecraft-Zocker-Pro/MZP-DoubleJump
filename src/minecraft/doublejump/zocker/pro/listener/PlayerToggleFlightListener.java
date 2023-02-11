@@ -22,6 +22,7 @@ public class PlayerToggleFlightListener implements Listener {
 			if ((new ParkourAPI()).isInParkour(player)) {
 				player.setAllowFlight(false);
 				player.setFlying(false);
+				event.setCancelled(true);
 				return;
 			}
 		}
